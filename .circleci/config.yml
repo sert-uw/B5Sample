@@ -43,3 +43,8 @@ jobs:
 
       # build
       - run: gradle clean build -x test
+
+      # deploy
+      - run: 
+        - cf https://api.run.pivotal.io
+        - cf auth $PCF_EMAIL $PCF_PASSWORD
