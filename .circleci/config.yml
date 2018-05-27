@@ -1,11 +1,6 @@
 version: 2
 jobs:
   build:
-    pre:
-      - curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
-      - sudo dpkg -i cf-cli_amd64.deb
-      - cf -v
-
     docker:
       - image: circleci/openjdk:8-jdk
 
@@ -37,5 +32,7 @@ jobs:
       - run: gradle clean build -x test
 
       # deploy
+      - run: curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
+      - run: sudo dpkg -i cf-cli_amd64.deb
       - run: cf https://api.run.pivotal.io
       - run: cf auth $PCF_EMAIL $PCF_PASSWORD
