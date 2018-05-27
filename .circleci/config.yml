@@ -46,5 +46,6 @@ jobs:
 
       # deploy
       - run: 
-        - cf https://api.run.pivotal.io
-        - cf auth $PCF_EMAIL $PCF_PASSWORD
+        post:
+          - cf https://api.run.pivotal.io
+          - cf auth $PCF_EMAIL $PCF_PASSWORD
